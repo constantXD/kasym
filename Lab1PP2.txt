@@ -1,0 +1,163 @@
+print("Hello, World!")
+C:\Users\Your Name>python --version
+C:\Users\Your Name>python hello.py
+
+Indentation defines code blocks (no {})
+Must use same spaces in a block
+Statements end with newline (no ; needed)
+
+Single line: # comment
+After code: x = 5 # comment
+Multi-line: triple quotes """ ... """ or ''' ... '''
+
+Created by assignment: x = 5
+Dynamic typing → can change type
+Type check: type(x)
+Casting: int(), float(), str()
+Naming rules: start with letter/_ , no digit first, case-sensitive
+
+Text: str
+Numbers: int, float, complex
+Sequence: list, tuple, range
+Mapping: dict
+Set types: set, frozenset
+Boolean: bool
+Binary: bytes, bytearray, memoryview
+Null: NoneType
+
+txt[2:5] → chars from index 2 to 4
+txt[:4] → from start to index 3
+txt[2:] → from index 2 to end
+Negative indexes: txt[-5:-2]
+
+Change case:
+
+.upper() → "HELLO"
+
+.lower() → "hello"
+
+.capitalize() → first letter upper
+
+.title() → each word capitalized
+
+.swapcase() → swap upper/lower
+
+Trim whitespace: .strip() (also .lstrip(), .rstrip())
+
+Replace: .replace("old","new")
+
+Split string → list: .split(",")
+
+Join list → string: " ".join(list)
+
+Search:
+
+.find("txt") → first index or -1
+
+.rfind("txt") → last index
+
+.index("txt") → like find but error if not found
+
+Count: .count("txt")
+
+Check prefix/suffix: .startswith("x"), .endswith("y")
+
+Character check:
+
+.isalpha() → letters only
+
+.isdigit() → digits only
+
+.isalnum() → letters+digits
+
+.isspace() → only spaces
+
+.islower(), .isupper(), .istitle()
+
+Concatenate: a + b
+Repeat: a * 3
+Format values:
+"My age is {}".format(25)
+f"My age is {age}" (f-strings)
+
+GitByBit
+
+Terminal / Command Line
+
+Where you type commands.
+
+In VS Code: View → Terminal or `Ctrl+``.
+
+Repository (repo)
+
+Storage for your project + version history.
+
+Create new: git init
+
+Copy existing: git clone URL
+
+Working Directory
+
+The folder with your project files.
+
+Where you edit code.
+
+Staging Area (Index)
+
+A buffer to hold changes before saving.
+
+Add files: git add file.txt or git add .
+
+Commit
+
+A snapshot of the project at a moment in time.
+
+Save changes: git commit -m "message"
+
+History (Log)
+
+Shows the list of commits.
+
+git log
+
+Status
+
+Shows changes in repo (staged, unstaged, untracked).
+
+git status
+
+HEAD
+
+A pointer to the current commit (where you are).
+
+Branch
+
+A separate line of development.
+
+List: git branch
+
+Create: git branch name
+
+Checkout
+
+Switch to another branch/commit.
+
+git checkout name
+
+Merge
+
+Combine changes from one branch into another.
+
+git merge name
+
+Remote
+
+A reference to a repo on GitHub/other server.
+
+Add remote: git remote add origin URL
+
+Clone
+
+Download a remote repo locally.
+
+git clone URL

@@ -12,15 +12,7 @@ def even_numbers_list(n):
     for x in range(0, n + 1, 2):
         result.append(x)
     return result
-
-def print_even_numbers_csv():
-    try:
-        n = int(input().strip())
-    except Exception:
-        print("Invalid input")
-        return
-    print(",".join(map(str, even_numbers_list(n))))
-
+    
 def divisible_by_3_and_4(n):
     result = []
     for x in range(0, n + 1):

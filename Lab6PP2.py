@@ -27,9 +27,6 @@ def palindrome(s):
 string = "madam"
 print(palindrome(string))
 
-import time
-import math
-
 def delayed_sqrt(number, delay_ms):
     time.sleep(delay_ms / 1000)
     return math.sqrt(number)
@@ -147,3 +144,4 @@ dst = '/your/directory/path/destination.txt'
 copy_file(src, dst)
 
 delete_file(filepath)
+

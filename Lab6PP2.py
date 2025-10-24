@@ -2,7 +2,9 @@ import math
 import time
 
 numbers = [2, 3, 4, 5]
-result = math.prod(numbers)
+result = 1
+for i in numbers:
+    result *= i
 print(result)
 
 def count_case(s):
@@ -153,5 +155,6 @@ print()
 copy_file(demo_file, os.path.join(base, "demo_copy.txt"))
 print()
 delete_file(demo_file)
+
 
 

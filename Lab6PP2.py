@@ -38,17 +38,7 @@ delay = int(input())
 result = delayed_sqrt(number, delay)
 print(f"Square root of {number} after {delay} milliseconds is {result}")
 
-def delayed_sqrt(number, delay):
-    time.sleep(delay / 1000)
-    return math.sqrt(number)
-
-number = int(input())
-delay = int(input())
-
-result = delayed_sqrt(number, delay)
-print(f"Square root of {number} after {delay} milliseconds is {result}")
-
-tup = (True, True, False)
+tup = (True, True, False, True, True, True, True)
 print(all(tup))
 
 import os
@@ -155,6 +145,7 @@ print()
 copy_file(demo_file, os.path.join(base, "demo_copy.txt"))
 print()
 delete_file(demo_file)
+
 
 
 

@@ -52,96 +52,106 @@ print(all(tup))
 import os
 from colorama import Fore
 import sys, tty, termios
-import string
 
-def list_files_directories(path):
+def list_only(path):
     print(Fore.CYAN + "Directories:")
-    for item in os.listdir(path):
-        if os.path.isdir(os.path.join(path, item)):
-            print(item)
-    
+    names = os.listdir(path)
+    for n in names:
+        p = os.path.join(path, n)
+        if os.path.isdir(p):
+            print(n)
+
     print(Fore.GREEN + "\nFiles:")
-    for item in os.listdir(path):
-        if os.path.isfile(os.path.join(path, item)):
-            print(item)
-    
-    print(Fore.YELLOW + "\nAll files and directories:")
-    for item in os.listdir(path):
-        print(item)
+    names = os.listdir(path)
+    for n in names:
+        p = os.path.join(path, n)
+        if os.path.isfile(p):
+            print(n)
+
+    print(Fore.YELLOW + "\nAll:")
+    names = os.listdir(path)
+    for n in names:
+        print(n)
 
 def check_access(path):
-    exists = os.path.exists(path)
-    if exists:
-        print(f"{Fore.GREEN}Path exists: {path}")
-        print(f"Readable: {os.access(path, os.R_OK)}")
-        print(f"Writable: {os.access(path, os.W_OK)}")
-        print(f"Executable: {os.access(path, os.X_OK)}")
-    else:
-        print(f"{Fore.RED}Path does not exist: {path}")
-
-def test_path_exists(path):
     if os.path.exists(path):
-        print(f"{Fore.GREEN}Path exists: {path}")
-        filename = os.path.basename(path)
-        directory = os.path.dirname(path)
-        print(f"Filename: {filename}")
-        print(f"Directory: {directory}")
+        print(Fore.GREEN + "Exists: True")
+        print("Readable:", os.access(path, os.R_OK))
+        print("Writable:", os.access(path, os.W_OK))
+        print("Executable:", os.access(path, os.X_OK))
     else:
-        print(f"{Fore.RED}Path does not exist: {path}")
+        print(Fore.RED + "Exists: False")
 
-def count_lines_in_file(filepath):
-    with open(filepath, 'r') as file:
-        lines = file.readlines()
-        print(f"{Fore.YELLOW}Number of lines: {len(lines)}")
+def path_info(path):
+    if os.path.exists(path):
+        print(Fore.GREEN + "Path exists")
+        print("Filename:", os.path.basename(path))
+        print("Directory:", os.path.dirname(path))
+    else:
+        print(Fore.RED + "Path does not exist")
 
-def write_list_to_file(filepath, my_list):
-    with open(filepath, 'w') as file:
-        for item in my_list:
-            file.write(f"{item}\n")
+def count_lines(file_path):
+    f = open(file_path, "r", encoding="utf-8")
+    lines = f.readlines()
+    f.close()
+    print(Fore.YELLOW + "Lines:", len(lines))
 
-def generate_files():
-    for letter in string.ascii_uppercase:
-        with open(f"{letter}.txt", 'w') as file:
-            file.write(f"This is file {letter}.txt")
+def write_list(file_path, items):
+    f = open(file_path, "w", encoding="utf-8")
+    for x in items:
+        f.write(str(x) + "\n")
+    f.close()
+    print(Fore.CYAN + "Wrote list to", file_path)
+
+def gen_AZ_files(path):
+    i = 65
+    while i <= 90:
+        name = chr(i) + ".txt"
+        full = os.path.join(path, name)
+        f = open(full, "w", encoding="utf-8")
+        f.write("This is file " + name + "\n")
+        f.close()
+        i = i + 1
+    print(Fore.CYAN + "Generated A.txt..Z.txt in", path)
 
 def copy_file(src, dst):
-    try:
-        with open(src, 'r') as fsrc, open(dst, 'w') as fdst:
-            fdst.write(fsrc.read())
-        print(f"{Fore.CYAN}File copied from {src} to {dst}")
-    except FileNotFoundError:
-        print(f"{Fore.RED}File not found.")
-    except PermissionError:
-        print(f"{Fore.RED}Permission denied.")
-    except Exception as e:
-        print(f"{Fore.RED}An error occurred: {e}")
+    s = open(src, "rb")
+    data = s.read()
+    s.close()
+    d = open(dst, "wb")
+    d.write(data)
+    d.close()
+    print(Fore.CYAN + "Copied", src, "to", dst)
 
-def delete_file(path):
-    if os.path.exists(path):
-        if os.access(path, os.W_OK):
-            os.remove(path)
-            print(f"{Fore.GREEN}File {path} deleted successfully.")
+def delete_file(file_path):
+    if os.path.exists(file_path):
+        if os.access(file_path, os.W_OK):
+            os.remove(file_path)
+            print(Fore.GREEN + "Deleted:", file_path)
         else:
-            print(f"{Fore.RED}File {path} is not writable.")
+            print(Fore.RED + "No write permission to delete")
     else:
-        print(f"{Fore.RED}File {path} does not exist.")
+        print(Fore.RED + "No such file")
+        
+base = os.getcwd()
+print(Fore.BLUE + "Base:", base)
 
-path = '/your/directory/path'
-filepath = '/your/directory/path/file.txt'
+list_only(base)
+print()
+check_access(base)
+print()
+demo_file = os.path.join(base, "demo.txt")
+write_list(demo_file, ["apple", "banana", "cherry"])
+print()
+path_info(demo_file)
+print()
 
-list_files_directories(path)
-check_access(path)
-test_path_exists(filepath)
-count_lines_in_file(filepath)
+count_lines(demo_file)
+print()
+gen_AZ_files(base)
+print()
+copy_file(demo_file, os.path.join(base, "demo_copy.txt"))
+print()
+delete_file(demo_file)
 
-my_list = ["apple", "banana", "cherry"]
-write_list_to_file(filepath, my_list)
-
-generate_files()
-
-src = '/your/directory/path/source.txt'
-dst = '/your/directory/path/destination.txt'
-copy_file(src, dst)
-
-delete_file(filepath)
 
